@@ -1,48 +1,32 @@
 import React, { Component } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { injectGlobal, ThemeProvider } from 'styled-components';
 import logo from './logo.svg';
 
-const StyledApp = styled.div`
-  text-align: center;
+import TopNavbar from './components/TopNavbar';
+
+// Color palette: http://paletton.com/#uid=15C0u0knNllbXAHiMqVtWeQIf6S
+
+injectGlobal`
+  body {
+    font-family: arial;
+  }
 `
 
-const StyledHeader = styled.header`
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-`
+const theme = {
+  redPrimary: '#A82B2E',
+  redLight: '#D5585B',
+  redVeryLight: '#FD9FA1',
+  redDark: '#75080B',
+  redVeryDark: '#360001'
+}
 
-const rotate360 = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`
-
-const StyledImg = styled.img`
-  animation: ${rotate360} infinite 20s linear;
-  height: 80px;
-`
-
-const AppTitle = styled.h1`
-  font-size: large;
-`
-
-const AppIntro = styled.p`
-  font-size: large;
-`
 
 class App extends Component {
   render() {
     return (
-      <StyledApp>
-        <StyledHeader>
-          <StyledImg className="App-logo" src={logo} alt="logo" />
-          <AppTitle>Welcome to React</AppTitle>
-        </StyledHeader>
-        <AppIntro>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </AppIntro>
-      </StyledApp>
+      <ThemeProvider theme={theme}>
+        <TopNavbar></TopNavbar>
+      </ThemeProvider>
     );
   }
 }
