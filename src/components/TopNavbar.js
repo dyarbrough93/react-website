@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import logo from '../logo.svg';
 
@@ -8,7 +9,7 @@ const Header = styled.header`
 
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-image: linear-gradient(90deg, rgba(255,255,255,0) 25%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 75%) 5%;
+  border-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%) 5%;
   border-image-slice: 5%;
 }
 `
@@ -35,23 +36,23 @@ const UnorderedList = styled.ul`
 `
 
 const ListItem = styled.li`
-  padding: 0 30px;
-  color: ${props => props.theme.veryLight};
   font-size: 1rem;
+  font-weight: bold;
   height: 100%;
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-align: center;
 
   :hover {
     background-color: ${props => props.theme.primary};
-    color: white;
   }
 
-  @media (max-width: 600px) {
-    padding: 0 10px;
+  :hover ${Link} {
+    color: white;
   }
 
 `
@@ -59,16 +60,28 @@ const ListItem = styled.li`
 const LogoContainer = styled.h1`
   flex: 1;
   margin: 0;
-  height: 100%;
+  width: 50px;
+  display: inline-block;
+  font-size: 2.75rem;
+  line-height: 3rem;
 `
 const Image = styled.img`
-  height: 3.125rem;
+  height: 2.75rem;
   overflow: hidden;
 `
 
 const StyledSection = styled.section`
-  height: 20px;
+  height: 200px;
   background-color: ${props => props.theme.dark};
+`
+
+const Link = styled.a`
+  color: ${props => props.theme.lightest};
+  transition: all 0.2s ease;
+  :link {text-decoration: none};
+  ${ListItem}:hover & {
+    color: white;
+  }
 `
 
 class TopNavbar extends Component {
@@ -79,16 +92,15 @@ class TopNavbar extends Component {
         <Header>
           <Wrapper>
             <Nav>
-              <LogoContainer>
-                <Image src={logo}></Image>
-              </LogoContainer>
               <UnorderedList>
-                <ListItem>Item1</ListItem>
-                <ListItem>Item2</ListItem>
-                <ListItem>Item3</ListItem>
-                <ListItem>Item4</ListItem>
-                <ListItem>Item5</ListItem>
-                <ListItem>Item6</ListItem>
+                <ListItem><Image src={logo}></Image></ListItem>
+
+                {this.props.items.map(item => {
+                  return <ListItem key={item.name}>
+                           <Link href={item.url}>{item.name}</Link>
+                         </ListItem>;
+                })}
+
               </UnorderedList>
             </Nav>
           </Wrapper>
