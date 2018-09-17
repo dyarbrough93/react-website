@@ -1,10 +1,22 @@
+/**
+ * A navbar that spans the entire width of the screen
+ *
+ * @typedef Item Navlink item
+ * @property {string} Item.name Name displayed in navbar
+ * @property {string} Item.url Url that it links to
+ *
+ * Props for TopNavbar:
+ * @param {Object[Item]} items Array of items
+ * @param {svg} image Svg image logo
+ */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import logo from '../logo.svg';
 
 const Header = styled.header`
-  background-color: ${props => props.theme.dark};
+  background-color: ${props => props.theme.dark || '#011823'};
   position: relative;
 
   border-bottom-style: solid;
@@ -48,35 +60,17 @@ const ListItem = styled.li`
   text-align: center;
 
   :hover {
-    background-color: ${props => props.theme.primary};
+    background-color: ${props => props.theme.primary || '#20536C'};
   }
-
-  :hover ${Link} {
-    color: white;
-  }
-
 `
 
-const LogoContainer = styled.h1`
-  flex: 1;
-  margin: 0;
-  width: 50px;
-  display: inline-block;
-  font-size: 2.75rem;
-  line-height: 3rem;
-`
 const Image = styled.img`
   height: 2.75rem;
   overflow: hidden;
 `
 
-const StyledSection = styled.section`
-  height: 200px;
-  background-color: ${props => props.theme.dark};
-`
-
 const Link = styled.a`
-  color: ${props => props.theme.lightest};
+  color: ${props => props.theme.lightest || '#739DB2'};
   transition: all 0.2s ease;
   :link {text-decoration: none};
   ${ListItem}:hover & {
@@ -93,7 +87,7 @@ class TopNavbar extends Component {
           <Wrapper>
             <Nav>
               <UnorderedList>
-                <ListItem><Image src={logo}></Image></ListItem>
+                <ListItem><Image src={this.props.image}></Image></ListItem>
 
                 {this.props.items.map(item => {
                   return <ListItem key={item.name}>
@@ -105,10 +99,25 @@ class TopNavbar extends Component {
             </Nav>
           </Wrapper>
         </Header>
-        <StyledSection></StyledSection>
       </div>
     );
   }
+}
+
+// define proptypes
+TopNavbar.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired
+  })).isRequired,
+  // from styled-components theming
+  theme: PropTypes.shape({
+    primary: PropTypes.string,
+    light: PropTypes.string,
+    lightest: PropTypes.string,
+    dark: PropTypes.string,
+    darkest: PropTypes.string.isRequired
+  })
 }
 
 export default TopNavbar;

@@ -4,6 +4,8 @@ import { injectGlobal, ThemeProvider } from 'styled-components';
 import TopNavbar from './components/TopNavbar';
 import Section from './components/Section';
 
+import logo from './logo.svg';
+
 // Color palette: http://paletton.com/#uid=15C0u0knNllbXAHiMqVtWeQIf6S
 
 injectGlobal`
@@ -36,12 +38,12 @@ class App extends Component {
       { name: 'Item2', url: '#' },
       { name: 'Item3', url: '#' },
       { name: 'Item4', url: '#' },
-      { name: 'Item5', url: '#' },
+      { name: 'Item5', url: '#' }
     ];
 
     return (
       <ThemeProvider theme={themeRed}>
-        <TopNavbar items={navbarItems}></TopNavbar>
+        <TopNavbar items={navbarItems} image={logo}></TopNavbar>
       </ThemeProvider>
     );
   }
