@@ -1,19 +1,6 @@
-/**
- * A navbar that spans the entire width of the screen
- *
- * @typedef Item Navlink item
- * @property {string} Item.name Name displayed in navbar
- * @property {string} Item.url Url that it links to
- *
- * Props for TopNavbar:
- * @param {Object[Item]} items Array of items
- * @param {svg} image Svg image logo
- */
-
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import logo from '../logo.svg';
 
 const Header = styled.header`
   background-color: ${props => props.theme.dark || '#011823'};
@@ -78,31 +65,28 @@ const Link = styled.a`
   }
 `
 
-class TopNavbar extends Component {
+/**
+ * A navbar that spans the entire width of the screen
+ */
+const TopNavbar = ({ items, image }) =>
+  <div>
+    <Header>
+      <Wrapper>
+        <Nav>
+          <UnorderedList>
+            <ListItem><Image src={image}></Image></ListItem>
 
-  render() {
-    return (
-      <div>
-        <Header>
-          <Wrapper>
-            <Nav>
-              <UnorderedList>
-                <ListItem><Image src={this.props.image}></Image></ListItem>
+            {items.map(item => {
+              return <ListItem key={item.name}>
+                       <Link href={item.url}>{item.name}</Link>
+                     </ListItem>;
+            })}
 
-                {this.props.items.map(item => {
-                  return <ListItem key={item.name}>
-                           <Link href={item.url}>{item.name}</Link>
-                         </ListItem>;
-                })}
-
-              </UnorderedList>
-            </Nav>
-          </Wrapper>
-        </Header>
-      </div>
-    );
-  }
-}
+          </UnorderedList>
+        </Nav>
+      </Wrapper>
+    </Header>
+  </div>
 
 // define proptypes
 TopNavbar.propTypes = {
