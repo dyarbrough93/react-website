@@ -30,6 +30,14 @@ const themeGreen = {
   darkest: '#0A2E00'
 }
 
+const themeBlue = {
+  primary: '#214F6D',
+  light: '#3D6B89',
+  lighest: '#749CB3',
+  dark: '#09324C',
+  darkest: '#011623'
+}
+
 class App extends Component {
   render() {
 
@@ -42,7 +50,7 @@ class App extends Component {
     ];
 
     return (
-      <ThemeProvider theme={themeRed}>
+      <ThemeProvider theme={themeBlue}>
         <TopNavbar items={navbarItems} image={logo}></TopNavbar>
       </ThemeProvider>
     );
