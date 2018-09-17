@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import styled, { injectGlobal, ThemeProvider } from 'styled-components';
-import logo from './logo.svg';
+import { injectGlobal, ThemeProvider } from 'styled-components';
 
 import TopNavbar from './components/TopNavbar';
+import Section from './components/Section';
 
 // Color palette: http://paletton.com/#uid=15C0u0knNllbXAHiMqVtWeQIf6S
 
@@ -12,19 +12,27 @@ injectGlobal`
   }
 `
 
-const theme = {
-  redPrimary: '#A82B2E',
-  redLight: '#D5585B',
-  redVeryLight: '#FD9FA1',
-  redDark: '#75080B',
-  redVeryDark: '#360001'
+const themeRed = {
+  primary: '#A82B2E',
+  light: '#D5585B',
+  veryLight: '#FD9FA1',
+  dark: '#75080B',
+  veryDark: '#360001'
+}
+
+const themeGreen = {
+  primary: '#3B8F25',
+  light: '#61B54B',
+  veryLight: '#9CDE8B',
+  dark: '#196306',
+  veryDark: '#0A2E00'
 }
 
 
 class App extends Component {
   render() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeGreen}>
         <TopNavbar></TopNavbar>
       </ThemeProvider>
     );
